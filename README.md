@@ -1,5 +1,6 @@
-# liberica-java
- Ansible Role: Install Liberica JDK from archive.
+# Ansible Role: Install Liberica JDK from archive.
+
+[![License][license-image]][license-url] [![Ansible Galaxy][ansible-galaxy-image]][ansible-galaxy-url] [![Ansible Galaxy Quality][ansible-galaxy-quality-image]][ansible-galaxy-url] [![Ansible Galaxy Release][ansible-galaxy-release-image]][ansible-galaxy-url]
 
  Install latest feature release or chosen release [Liberica JDK](https://bell-sw.com/) for Linux from archive.
 
