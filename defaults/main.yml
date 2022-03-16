@@ -32,6 +32,3 @@ liberica_java_bundle_type: jdk
 # Default:
 # liberica_java_insecure: false
 liberica_java_insecure: false
-
-
-
