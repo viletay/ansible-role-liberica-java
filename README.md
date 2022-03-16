@@ -1,6 +1,10 @@
 # Ansible Role: Install Liberica JDK from archive.
 
+<<<<<<< HEAD
  [![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
+=======
+[![License][license-image]][license-url] [![Ansible Galaxy][ansible-galaxy-image]][ansible-galaxy-url] [![Ansible Galaxy Quality][ansible-galaxy-quality-image]][ansible-galaxy-url] [![Ansible Galaxy Release][ansible-galaxy-release-image]][ansible-galaxy-url]
+>>>>>>> 1665d7d0f3adf903c35adf6e7e6e021b7a68441a
 
  Install latest feature release or chosen release [Liberica JDK](https://bell-sw.com/) for Linux from archive.
 
