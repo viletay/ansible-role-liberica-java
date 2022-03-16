@@ -1,0 +1,8 @@
+---
+- import_tasks: gather_liberica.yml
+
+- import_tasks: install_liberica.yml
+  when: not liberica_java_is_installed
+
+- import_tasks: update_liberica.yml
+  when: not liberica_java_is_updated

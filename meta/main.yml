@@ -1,0 +1,22 @@
+galaxy_info:
+  author: Kalugin-Balashov Konstantin
+  description: Install and Update Liberica Java for Linux from TGZ
+
+  license: Apache License, Version 2.0
+
+  min_ansible_version: "2.9"
+
+  platforms:
+    - name: EL
+      versions:
+        - "7"
+
+  galaxy_tags:
+    - linux
+    - centos
+    - java
+    - jdk
+    - jre
+    - bellsoft
+    - liberica
+    - tgz

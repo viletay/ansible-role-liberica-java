@@ -1,0 +1,4 @@
+liberica_java_output: json
+liberica_java_package_type: tar.gz
+liberica_java_version_modifier: latest
+liberica_java_api_releases_url: https://api.bell-sw.com/v1/liberica/releases

@@ -1,0 +1,88 @@
+---
+- name: These role currently supports only linux servers
+  ansible.builtin.fail: 
+    msg: "These role currently supports only linux servers"
+  when: ansible_system != 'Linux'
+
+- name: Set liberica_java_os fact
+  ansible.builtin.set_fact:
+    liberica_java_os: linux
+  when: ansible_system == 'Linux'
+
+- name: These role currently supports only x86_64 architecture
+  ansible.builtin.fail: 
+    msg: "These role currently supports only x86_64 architecture"
+  when: ansible_architecture != 'x86_64'
+
+- name: Set liberica_java_architecture and liberica_java_bitness facts
+  block:
+    - ansible.builtin.set_fact:
+        liberica_java_architecture: x86
+    - ansible.builtin.set_fact:
+        liberica_java_bitness: 64
+  when: ansible_architecture == 'x86_64'
+  
+- name: Check Liberica Java installation path
+  ansible.builtin.stat:
+    path: '{{ liberica_java_home }}/bin/java'
+  register: result
+
+- name: Set liberica_java_is_installed fact
+  ansible.builtin.set_fact:
+    liberica_java_is_installed: '{{ result.stat.exists }}'
+
+- name: Check Liberica Java current release
+  ansible.builtin.shell: 
+    cmd: "{{ liberica_java_home }}/bin/java -version 2>&1 | grep Runtime | awk '{print $5}' | awk -F - '{print $1}'"
+  register: result 
+  when: liberica_java_is_installed
+
+- name: Set liberica_java_installed_version fact
+  ansible.builtin.set_fact:
+    liberica_java_installed_version: '{{ result.stdout }}'
+  when: liberica_java_is_installed
+
+- name: Set liberica_java_requered_version_query fact
+  block:
+    - ansible.builtin.set_fact:
+        liberica_java_requered_version_query: "{{ liberica_java_api_releases_url }}?\
+                                              os={{ liberica_java_os }}&\
+                                              arch={{ liberica_java_architecture }}&\
+                                              bitness={{ liberica_java_bitness }}&\
+                                              bundle-type={{ liberica_java_bundle_type }}&\
+                                              package-type={{ liberica_java_package_type }}&\
+                                              version-feature={{ liberica_java_version_feature }}&\
+                                              version-modifier={{ liberica_java_version_modifier }}&\
+                                              output={{ liberica_java_output }}"
+      when: liberica_java_version is not defined
+    - ansible.builtin.set_fact:
+        liberica_java_requered_version_query: "{{ liberica_java_api_releases_url }}?\
+                                              os={{ liberica_java_os }}&\
+                                              arch={{ liberica_java_architecture }}&\
+                                              bitness={{ liberica_java_bitness }}&\
+                                              bundle-type={{ liberica_java_bundle_type }}&\
+                                              package-type={{ liberica_java_package_type }}&\
+                                              version={{ liberica_java_version }}&\
+                                              output={{ liberica_java_output }}"
+      when: liberica_java_version is defined
+
+- name: Check Liberica Java requered version
+  ansible.builtin.uri:
+        url: "{{ liberica_java_requered_version_query }}"
+  delegate_to: 127.0.0.1
+  register: result
+  when: liberica_java_version is not defined
+
+- name: Set liberica_java_required_version fact
+  block:
+    - ansible.builtin.set_fact: 
+        liberica_java_required_version: '{{ liberica_java_version }}'
+      when: liberica_java_version is defined
+    - ansible.builtin.set_fact: 
+        liberica_java_required_version: '{{ result.json[0].version }}'
+      when: liberica_java_version is not defined
+
+- name: Set liberica_java_is_updated fact
+  ansible.builtin.set_fact:
+    liberica_java_is_updated: "{{ liberica_java_required_version == liberica_java_installed_version }}"
+  when: liberica_java_is_installed

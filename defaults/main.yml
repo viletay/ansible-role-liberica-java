@@ -1,0 +1,37 @@
+---
+## Variable: liberica_java_home
+#     Full pathname of a installation directory.
+#
+# Default:
+# liberica_java_home: /usr/local/java
+liberica_java_home: /usr/local/java
+
+## Variable: liberica_java_version_feature
+#     Specifies feature version or formerly known as a major version.
+#
+# Default:
+# liberica_java_version_feature: 11
+liberica_java_version_feature: 11
+
+## Variable: liberica_java_bundle_type
+#     Specifies the content of the package:
+#         jdk      — a regular package that contains the full Liberica JDK, not including JavaFX.
+#         jdk-full — contains the full Liberica JDK, including JavaFX and a variety of JVMs for platforms that support it.
+#         jdk-lite — includes Liberica JDK with compressed modules and Server VM, without any extra packages.
+#         jre      — contains Java SE Runtime Environment only.
+#         jre-full — contains Java SE Runtime Environment, including JavaFX.
+#     Please note that for Liberica JDK 8 there’re no lite packages.
+#
+# Default: 
+# liberica_java_bundle_type: jdk
+liberica_java_bundle_type: jdk
+
+## Variable: liberica_java_insecure
+#     Allow the role to insert own java.security.
+#
+# Default:
+# liberica_java_insecure: false
+liberica_java_insecure: false
+
+
+
