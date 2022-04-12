@@ -22,7 +22,7 @@ liberica_java_version_feature: 11
 #         jre-full — contains Java SE Runtime Environment, including JavaFX.
 #     Please note that for Liberica JDK 8 there’re no lite packages.
 #
-# Default: 
+# Default:
 # liberica_java_bundle_type: jdk
 liberica_java_bundle_type: jdk
 
